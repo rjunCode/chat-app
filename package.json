@@ -8,7 +8,10 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.3",
-    "shortid": "^2.2.8"
+    "request": "^2.88.0",
+    "shortid": "^2.2.8",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0"
   },
   "devDependencies": {
     "serve": "^3.1.0",
@@ -16,12 +19,13 @@
     "body-parser": "~1.0.1"
   },
   "scripts": {
-    "app": "npm run start & npm run server",
+    "app": "npm run start & npm run server & npm run io-server",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "node server.js"
+    "server": "node server.js",
+    "io-server": "node socket-server.js"
   },
   "eslintConfig": {
     "extends": "react-app"

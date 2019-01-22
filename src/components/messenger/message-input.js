@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Button from "../common/button";
 
 class MessageInput extends Component {
   state = {
@@ -33,7 +34,7 @@ class MessageInput extends Component {
           placeholder="Type message..."
           onChange={e => this.handleChange(e)}
         />
-        <button type="submit">Send</button>
+        <Button type="submit" view="secondary" label="Send" />
       </form>
     );
   }

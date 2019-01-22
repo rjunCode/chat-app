@@ -1,4 +1,5 @@
 const BASE_URL = "http://localhost:8080/api";
+
 const ChatService = {
   async fetch() {
     const response = await fetch(`${BASE_URL}/rooms`);

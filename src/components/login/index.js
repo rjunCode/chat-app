@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Button from "../common/button";
 
 class Login extends Component {
   state = {
@@ -25,7 +26,11 @@ class Login extends Component {
             placeholder="Type your username..."
             onChange={e => this.handleChange(e)}
           />
-          <button type="submit">Join the DoorDash Chat!</button>
+          <Button
+            type="submit"
+            label="Join the DoorDash Chat!"
+            view="primary"
+          />
         </form>
       </div>
     );
