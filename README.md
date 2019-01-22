@@ -2,6 +2,7 @@
 
 - npm install
 - npm run app
+- Launch the app on http://localhost:3000
 
 ## Frameworks
 
