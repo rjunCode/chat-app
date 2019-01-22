@@ -1,0 +1,82 @@
+.messenger {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  width: calc(100% - #{$nav-bar-width});
+
+  .messages {
+    flex: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: $gray-bg;
+    padding: 10px;
+
+    .message-item {
+      padding: 0 10px 20px 10px;
+      .text {
+        background-color: $white;
+        padding: 10px;
+        border-radius: 5px;
+        width: fit-content;
+        max-width: 80%;
+        word-break: break-word;
+      }
+
+      .text-by {
+        font-size: 14px;
+        padding: 5px;
+        color: gray;
+      }
+    }
+
+    .compact {
+      padding-bottom: 5px;
+    }
+
+    .current {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      .text {
+        color: white;
+        background-color: $door-dash-red;
+      }
+    }
+  }
+
+  .message-form {
+    display: flex;
+    height: $message-form-height;
+    box-shadow: 0px -1px 1px lightgrey;
+    z-index: $z-index-level-1;
+  }
+
+  .message-input {
+    flex: 1;
+  }
+
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $message-header-height;
+    flex-direction: column;
+    box-shadow: 0 1px 1px $light-gray;
+    z-index: $z-index-level-1;
+  }
+
+  .room-name {
+    font-size: 36px;
+    color: #565656;
+    margin: 10px;
+  }
+
+  .member {
+    color: #565656;
+    .current {
+      color: $door-dash-red;
+    }
+  }
+}

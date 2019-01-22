@@ -1,0 +1,35 @@
+.nav-bar {
+  width: $nav-bar-width;
+  background-color: $door-dash-red;
+
+  .user {
+    padding: 20px;
+    color: $white;
+
+    .name {
+      font-size: 30px;
+      padding-bottom: 5px;
+    }
+  }
+
+  .rooms {
+    margin-top: 20px;
+
+    .room-item {
+      padding: 15px;
+      color: $white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .room-item {
+      &:hover {
+        background-color: $hover-brown;
+      }
+    }
+
+    .selected {
+      background-color: $hover-brown;
+    }
+  }
+}
