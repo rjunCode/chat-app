@@ -9,4 +9,4 @@
 - I have used React for this assignment
 - SASS for styling
 - ContextAPI for state management
-- I created a simple websocket layer for instant chat updates
+- I created a simple websocket layer for instant chat updates. You can open the app on two different tabs as different users and chat
