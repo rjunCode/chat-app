@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import ChatProvider from "./components/chat-provider";
 import Login from "./components/login";
 import "./app.scss";
