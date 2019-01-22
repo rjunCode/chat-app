@@ -1,26 +1,23 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import ChatProvider from "./components/chat-provider";
+import Login from "./components/login";
+import "./app.scss";
+import { AppContext, AppContextProvider } from "./contexts/app";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <AppContextProvider>
+        <AppContext.Consumer>
+          {({ user, setUser, time }) => {
+            if (user) {
+              return <ChatProvider user={user} time={time} />;
+            } else {
+              return <Login setUser={setUser} />;
+            }
+          }}
+        </AppContext.Consumer>
+      </AppContextProvider>
     );
   }
 }
