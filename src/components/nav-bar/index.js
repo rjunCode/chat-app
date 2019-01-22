@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ChatRooms from "./chat-rooms";
+import classnames from "classnames";
 
 export const UserInfo = ({ user, time }) => (
   <div className="user">
@@ -7,6 +7,28 @@ export const UserInfo = ({ user, time }) => (
     <div className="time">
       {`Online for ${time} ${time === 1 ? "minute" : "minutes"}`}
     </div>
+  </div>
+);
+
+export const RoomItem = ({ name, onSelect, isSelectedRoom }) => {
+  const classes = classnames("room-item", { selected: isSelectedRoom });
+  return (
+    <div className={classes} onClick={onSelect}>
+      {name}
+    </div>
+  );
+};
+
+export const ChatRooms = ({ rooms, setSelectedRoom, selectedRoom }) => (
+  <div className="rooms">
+    {(rooms || []).map(({ id, name }) => (
+      <RoomItem
+        key={id}
+        name={name}
+        isSelectedRoom={selectedRoom === id}
+        onSelect={() => setSelectedRoom(id)}
+      />
+    ))}
   </div>
 );
 

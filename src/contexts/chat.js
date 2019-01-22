@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import ChatService from "../services/chat";
+import openSocket from "socket.io-client";
+
+const BASE_SOCKET_URL = "http://localhost:80";
+const socket = openSocket(BASE_SOCKET_URL);
 
 export const ChatContext = React.createContext();
 
@@ -9,6 +13,24 @@ export class ChatContextProvider extends Component {
     messageMap: {},
     roomDetails: {}
   };
+
+  componentDidMount() {
+    socket.on("on-chat-update", ({ roomId, response }) => {
+      this.updateMap("messageMap", roomId, response);
+    });
+  }
+
+  updateMap(mapName, key, data, cb = () => {}) {
+    this.setState(
+      {
+        [mapName]: {
+          ...this.state[mapName],
+          [key]: data
+        }
+      },
+      cb
+    );
+  }
 
   fetchChatRooms = async () => {
     const rooms = await ChatService.fetch();
@@ -23,22 +45,12 @@ export class ChatContextProvider extends Component {
 
   fetchMessages = async id => {
     const messages = await ChatService.fetchMessages(id);
-    this.setState({
-      messageMap: {
-        ...this.state.messageMap,
-        [id]: messages
-      }
-    });
+    this.updateMap("messageMap", id, messages);
   };
 
   fetchRoomDetails = async id => {
     const details = await ChatService.fetchRoomDetails(id);
-    this.setState({
-      roomDetails: {
-        ...this.state.roomDetails,
-        [id]: details
-      }
-    });
+    this.updateMap("roomDetails", id, details);
   };
 
   updateRoomDetails(user, roomId) {
@@ -51,16 +63,15 @@ export class ChatContextProvider extends Component {
   postMessage = async (roomId, user, message) => {
     const postedMessage = await ChatService.postMessage(roomId, message, user);
     if (!postedMessage.error) {
-      const { messageMap } = this.state;
-      this.setState(
-        {
-          messageMap: {
-            ...messageMap,
-            [roomId]: [...(messageMap[roomId] || []), postedMessage]
-          }
-        },
-        () => this.updateRoomDetails(user, roomId)
-      );
+      const messages = [
+        ...(this.state.messageMap[roomId] || []),
+        postedMessage
+      ];
+
+      this.updateMap("messageMap", roomId, messages, () => {
+        socket.emit("update-chat", { roomId });
+        this.updateRoomDetails(user, roomId);
+      });
     }
 
     return postedMessage;
